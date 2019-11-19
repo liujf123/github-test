@@ -19,7 +19,7 @@ cur = db.cursor()
 cur.execute("delete from cls1 where name='Tom';")
 db.commit()
 
-# 关闭游标和数据库链接
+# 关闭游标和数据库链接dsdsads
 cur.close()
 db.close()
 
