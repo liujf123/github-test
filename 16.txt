@@ -1,0 +1,117 @@
+前情回顾
+
+1. 视图的使用
+   create [or replace] view [view_name] as [select..]
+
+   drop view [if exists] [view]
+
+2. 函数 和 存储过程
+
+   函数： 有返回值，参数只能是输入参数，使用select调用，可以用在语句中
+
+   存储过程：没有返回值，参数为in  out  inout类型。更类似语句执行集合，使用call调用
+
+   delimiter [符号]
+
+   create function [fname](args) returns [r_type]
+   begin
+   语句1;
+   语句2;
+   return [val];
+   end
+
+   create procedure [pname](args)
+   begin
+   语句1;
+   语句2;
+   end
+
+3. 事务控制
+
+   一个数据操作的完整过程
+
+   原子性   一致性   隔离性    持久性
+
+   begin;
+   语句1;
+   ...
+   commit;  提交操作
+   rollback; 回滚操作
+
+4. 数据库的优化
+
+   范式思想
+
+   第一范式： 要求每个字段不可再分
+   第二范式： 有一个字段值可以唯一的区分各个记录，其他字段之间最好别有依赖
+   第三范式：不要进行依赖传递，多个表不会出现相同的字段，或者外键关联的依赖关系
+
+   引擎
+     InnoDB
+     MyISAM
+
+     create table  [tb] () engine=MyISAM；
+
+   字段数据类型选择
+
+     数字 > 时间 > 字符串
+
+     * 占用空间少，对后续操作有利
+
+   键的设置
+     * 占用空间小的字段设置键
+     * 高并发情形下不适合创建过多外键关联
+
+   explain语句
+
+练习1： 创建一个新用户
+      将stu下的cls1表授权给该用户
+      但是让他只有读权限
+
+练习2： 创建数据库 dict 使用utf8编码
+        create database dict charset=utf8;
+
+       在数据库中创建数据表 words包含字段
+       id  word  mean
+        create table words (id smallint auto_increment,word char(32) not null,mean varchar(256),primary key(id),index(word));
+
+       将单词本中的单词插入到数据库中,单词和解释分别插入记录的对应字段
+
+
+cookie ：
+    文件存储数据库方法？
+
+    方法一： 存路径
+
+          e.g.  小泽图片
+                "/home/tarena/老师们/小泽/xxx.jpg"
+
+          优点： 节省数据库空间，提取使用方便
+          缺点： 一旦路径移动，数据库就需要修改
+
+    方法二： 存文件本身
+
+          优点 ： 数据库在，文件就在
+          缺点 ： 占用数据库空间大，读写效率低
+
+练习3：
+     使用数据库完成登录注册功能，数据表自己拟定
+
+     * 注册方法：收集用户信息，将用户信息存储到数据库，用户名不能重复
+     * 登录方法：获取用户名密码，与数据库信息比对，判定是否允许登录
+
+作业 ：
+     1. 登录的代码，自己写完
+     2. 数据库部分总结
+     3. 聊天室和ftp的代码
+     4. github.com 注册一个用户
+
+
+
+
+
+
+
+
+
+
